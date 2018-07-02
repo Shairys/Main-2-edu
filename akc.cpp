@@ -1,70 +1,64 @@
 #include <iostream>
-#include <vector>
-using namespace std;
-int binary_search1(vector<int> & test, int x)
-{
-int p=0, k=test.size()-1;
-int srodek=0;
-while(p<k)
-    {
-        srodek=(p+k)/2;
-        if(test[srodek]>=x)
-            k=srodek;
-        else
-            p=srodek+1;
-    }
-    if(test[p]==x)
-        return p;
-    else
-        return -1;
 
+int searchDown(int * tab, int s, int n)
+{
+    int p = 0;
+    int q = n-1;
+    while(p < q)
+    {
+        int h = (p+q)/2;
+        if (tab[h] >= s)
+            q = h;
+        else
+            p = h+1;
+    }
+    if(tab[p] != s)
+        return -1;
+    else
+        return p;
 }
 
-int binary_search2(vector<int> & test, int x)
+int searchUp(int * tab, int s, int n)
 {
-int p=0, k=test.size()-1;
-int srodek=0;
-while(p<k)
+    int p = 0;
+    int q = n-1;
+    while(p < q)
     {
-        srodek=(p+k+1)/2;
-        if(test[srodek]<=x)
-            p=srodek;
+        int h = (p+q+1)/2;
+        if (tab[h] <= s)
+            p = h;
         else
-            k=srodek-1;
+            q = h-1;
     }
-    if(test[p]==x)
-        return p;
-    else
+    if(tab[p] != s)
         return -1;
-
+    else
+        return p;
 }
+
 
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    vector<int> cz;
-    int tmp, tmp2;
-    int p, k;
-    cin>>tmp;
-    while(tmp--)
+    std::ios_base::sync_with_stdio(0);
+    std::cin.tie(0);
+
+    int n, q, s;
+    std::cin >> n;
+    int * tab = new int[n];
+
+    for(int i = 0; i < n; i++)
+        std::cin >> tab[i];
+
+    std::cin >> q;
+
+    while(q--)
     {
-        cin>>tmp2;
-        cz.push_back(tmp2);
-    }
-    cin>>tmp;
-    while(tmp--)
-    {
-        cin>>tmp2;
-        p=binary_search1(cz, tmp2);
-        if(p<0)
-            cout<<0 <<"\n";
+        std::cin >> s;
+        int p = searchDown(tab, s, n);
+        int q = searchUp(tab, s, n);
+        if (p == -1)
+            std::cout<<0 << "\n";
         else
-        {
-            k=binary_search2(cz, tmp2);
-            cout<<k-p+1 <<"\n";
-        }
+            std::cout<< q - p + 1 << "\n";
     }
 }
-
-
