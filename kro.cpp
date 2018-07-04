@@ -1,34 +1,31 @@
 #include <iostream>
 
-using namespace std;
-
-int potegowanie(int a, int b)
+int power(int a, int b)
 {
-    if(b==1)
-        return a%10000;
-    if(b%2==0)
+    if(b == 1)
+        return a % 10000;
+    if(b%2 == 0)
     {
-        int s=potegowanie(a, b/2);
+        int s = power(a, b/2);
         return (s*s)%10000;
     }
     else
     {
-        int s=potegowanie(a, b-1);
-        return (s*a)%10000;
+        int s = power(a, b-1);
+        return (a*s)%10000;
     }
 }
 
+
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-
-    int i, a, b;
-    cin>>i;
-    while(i--)
+    std::ios_base::sync_with_stdio(0);
+    std::cin.tie(0);
+    int n, a, b;
+    std::cin >> n;
+    while(n--)
     {
-        cin>>a>>b;
-        a+=1;
-        cout<<potegowanie(a, b)<<"\n";
+        std::cin >> a >> b;
+        std::cout << power(a+1, b) << "\n";
     }
 }
