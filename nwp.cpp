@@ -17,6 +17,7 @@ int main()
             }
     }
 
+    int max = 0;
     for(int i=1; i<_A; i++)
         for(int j=1; j<_B; j++)
         {
@@ -31,9 +32,7 @@ int main()
 
     std::cout<<k[_A-1][_B-1];
 
-    for(int i=0; i<_A; i++)
-        delete[] k[i];
-    delete[] k;
+
 
 
 }
