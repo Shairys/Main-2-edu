@@ -71,6 +71,7 @@ int main()
     }
     if(!znaleziony)
         std::cout << "NIE" << "\n";
+    delete[] uczestnicy;
 
 
 }
