@@ -1,48 +1,76 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <string>
-using namespace std;
-
+#include <algorithm>
 struct osoba
 {
-    string imie;
+    std::string nazwisko;
     int liczba;
-    bool operator < (const osoba &b) const
+    bool operator < (const osoba & o) const
     {
-        return this->liczba < b.liczba;
+        return this->liczba < o.liczba;
     }
-
-    osoba(string s, int i) : imie(s), liczba(i)
+    osoba(std::string na, int s)
     {
-
+        this->nazwisko = na;
+        this->liczba = s;
+    }
+    osoba()
+    {
+        this->nazwisko = "";
+        this->liczba = 0;
     }
 };
+
+bool bin(osoba * o, int q, int s)
+{
+    int p = 0, h;
+    q --;
+    while(p<q)
+    {
+        h = (p+q)/2;
+        if(o[h].liczba >= s)
+            q = h;
+        else
+            p = h+1;
+    }
+    if(o[p].liczba != s)
+        return false;
+    else
+    {
+        std::cout << o[p].nazwisko << " ";
+        return true;
+    }
+
+}
 
 
 int main()
 {
-    int k, wygrana, tmp;
-    string s;
-    vector<osoba> uczestnicy;
-    cin>>k >>wygrana;
-    for(int i = 0; i<k; i++)
+    std::ios_base::sync_with_stdio(0);
+    std::cin.tie(0);
+
+    int n, s, l;
+    std::string na;
+    std::cin >> n >> s;
+    osoba * uczestnicy = new osoba[n];
+    for(int i = 0; i<n; i++)
     {
-        cin>>s>>tmp;
-        uczestnicy.push_back(osoba(s, tmp) );
+        std::cin >> na >> l;
+        uczestnicy[i] =  osoba(na, l);
     }
-    sort(uczestnicy.begin(), uczestnicy.end());
-    vector<int> liczby;
-    for(int i = 0; i < k; i++)
+    std::sort(uczestnicy, uczestnicy+n);
+    bool znaleziony = false;
+    for(int i = 0; i<n && !znaleziony; i++)
     {
-        vector<osoba>::iterator it = lower_bound(uczestnicy.begin(), uczestnicy.end(), osoba("", wygrana-uczestnicy[i].liczba));
-        if(it->liczba == wygrana-uczestnicy[i].liczba)
+        znaleziony = bin(uczestnicy, n, s-uczestnicy[i].liczba);
+        if(znaleziony)
         {
-            cout<< uczestnicy[i].imie <<" " << it->imie<<"\n";
-            return 0;
+            std::cout<< uczestnicy[i].nazwisko << "\n";
+            break;
         }
     }
+    if(!znaleziony)
+        std::cout << "NIE" << "\n";
 
-        cout<<"NIE"<<"\n";
 
 }

@@ -1,50 +1,48 @@
 #include <iostream>
-#include <vector>
 
-long long inwersje = 0;
-
-using namespace std;
-void mergeSort(int p, int q, int *A)
+int * A;
+int * B;
+long long licznik = 0;
+void mergeSort(int p, int q)
 {
-	if (p == q)
-		return;
-	int s = (p + q) / 2;
-	mergeSort(p, s, A);
-	mergeSort(s + 1, q, A);
-	int i = p;
-	int j = s + 1;
-	int * B = new int[q+1];
-	for (int k = p; k <= q; k++)
-		if (j>q || (i <= s && A[i] <= A[j]))
-		{
-			B[k] = A[i];
-			i++;
-		}
-		else
-		{
-			if (i <= s && A[i] > A[j])
-				inwersje += s + 1 - i;
-			B[k] = A[j];
-			j++;
-		}
-
-	for (int k = p; k <= q; k++)
-		A[k] = B[k];
-	delete[] B;
+    if(p==q)
+        return;
+    int h = (p+q)/2;
+    mergeSort(p, h);
+    mergeSort(h+1, q);
+    int j = h+1, i = p;
+    for(int k = p; k<=q; k++)
+    {
+        if((j>q) || (A[i]<A[j] && i<=h) )
+        {
+            B[k]=A[i];
+            i++;
+        }
+        else
+        {
+            if(i<=h)
+                licznik += h-i+1;
+            B[k]=A[j];
+            j++;
+        }
+    }
+    for(int k = p; k<=q; k++)
+        A[k]=B[k];
 }
+
 
 int main()
 {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	int n;
-	cin >> n;
-	int * liczby = new int[n];
-	for (int i = 0; i < n; i++)
-		cin >> liczby[i];
-	mergeSort(0, n - 1, liczby);
-	for (int i = 0; i < n; i++)
-		cout << liczby[i] << " ";
-	cout <<"\n" << inwersje << "\n";
-	delete[] liczby;
+    std::ios_base::sync_with_stdio(0);
+    std::cin.tie(0);
+    int n;
+    std::cin >> n;
+    A = new int[n];
+    B = new int[n];
+    for(int i = 0; i<n; i++)
+        std::cin >> A[i];
+    mergeSort(0, n-1);
+    for(int i = 0; i<n; i++)
+        std::cout<<A[i] << " ";
+    std::cout << "\n" <<licznik;
 }
