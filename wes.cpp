@@ -1,23 +1,33 @@
 #include <iostream>
 
+using namespace std;
+
+void swap(int &a, int &b)
+{
+a+=b;
+b=a-b;
+a-=b;
+}
 int nwd(int a, int b)
 {
-    if (a > b)
-        std::swap(b, a);
-    if (a == 0)
-        return b;
-    return nwd(a, b%a);
+if (a<b)
+    swap(a, b);
+if(b==0)
+    return a;
+else
+    return nwd(b, a%b);
 }
 
 int main()
 {
-    std::ios_base::sync_with_stdio(0);
-    std::cin.tie(0);
-    int z, n, d;
-    std::cin >> z;
-    while(z--)
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    int tmp, n, d;
+    cin>>tmp;
+    while(tmp--)
     {
-        std::cin >> n >> d;
-        std::cout << n/nwd(n, d) << "\n";
+        cin>>n>>d;
+        cout<<n/nwd(n, d)<<"\n";
     }
+
 }
