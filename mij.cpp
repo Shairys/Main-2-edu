@@ -1,22 +1,20 @@
 #include <iostream>
-using namespace std;
+
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    long long licznik = 0;
-    int samochody, zera=0, mnoznik=0, typ;
-    cin>>samochody;
-    while(samochody--)
+    std::ios_base::sync_with_stdio(0);
+    std::cin.tie(0);
+
+    int n, s, licznik = 0;
+    long long odp = 0;
+    std::cin >> n;
+    while(n--)
     {
-        cin>>typ;
-        if(!typ)
-            mnoznik++;
+        std::cin >> s;
+        if(s == 0)
+            licznik ++;
         else
-            licznik+=mnoznik;
+            odp += licznik;
     }
-    cout<<licznik;
-
-
-
+    std::cout << odp;
 }

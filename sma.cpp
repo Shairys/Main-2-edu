@@ -1,58 +1,46 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <list>
-
-using namespace std;
-
 
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int n, m, k=0,l=0;
-    long long licznik=0;
-    cin>>n>>m;
-    int *liczby = new int[n];
-    bool *tab = new bool[m+1];
+    std::ios_base::sync_with_stdio(0);
+    std::cin.tie(0);
 
-    for(int i=0; i<n; i++)
-        cin>>liczby[i];
-    for(int i=0; i<m+1; i++)
-        tab[i]=0;
+	int n, m;
+	std::cin >> n >> m;
 
-    for(int i=0; i<n; i++)
-    {
-        if(!(tab[liczby[i]]))
-        {
-            l++;
-            licznik+=l;
-            tab[liczby[i]]=1;
-        }
-        else
-        {
-            for(int y=k; y<n; y++)
-            {
-                if(liczby[y]!=liczby[i])
-                {
-                    l--;
-                    k++;
-                    tab[liczby[y]]=0;
-                }
-                else
-                {
-                    k++;
-                    licznik+=l;
-                    break;
-                }
-            }
-        }
+	bool * rodz = new bool[m + 1];
+	for (int i = 0; i <= m; i++)
+		rodz[i] = false;
+	int * cuk = new int[n];
 
+	for (int i = 0; i<n; i++)
+		std::cin >> cuk[i];
 
-    }
-
-
-    cout<<licznik;
-
-
+	int licznik = 0;
+	long long odp = 0;
+	int pocz = 0;
+	for (int i = 0; i<n; i++)
+	{
+		if (rodz[cuk[i]] == false)
+		{
+			rodz[cuk[i]] = true;
+			licznik++;
+			odp += licznik;
+		}
+		else
+		{
+			while (rodz[cuk[i]] != false)
+			{
+				rodz[cuk[pocz]] = false;
+				licznik--;
+				pocz++;
+			}
+			rodz[cuk[i]] = true;
+			licznik++;
+			odp += licznik;
+		}
+	}
+	std::cout << odp << "\n";
+	delete[] rodz;
+	delete[] cuk;
 }
