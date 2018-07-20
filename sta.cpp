@@ -7,8 +7,7 @@ int tree[524289]; //2^19 +1
 int bajt = 0;
 int leaf_count;
 
-void load()
-{
+void load(){
     for(int i = leaf_count; i < leaf_count+bajt; i++)
         std::cin >> tree[i];
     int current = leaf_count/2;
@@ -23,8 +22,7 @@ void load()
     }
 }
 
-void update(int k, int x)
-{
+void update(int k, int x){
     int current = leaf_count+k;
     tree[current] = x;
     current /= 2;
@@ -53,8 +51,7 @@ int max(int L, int R, int v = 1, int a = 0, int b = leaf_count - 1){
 	}
 }
 
-int main()
-{
+int main(){
     std::ios_base::sync_with_stdio(0);
     std::cin.tie(0);
 
@@ -65,8 +62,7 @@ int main()
     leaf_count = std::pow(2, log);
     load();
 
-    while(m--)
-    {
+    while(m--){
         std::cin >> s;
         if(s == "MAX"){
             std::cin >> k >> x;
