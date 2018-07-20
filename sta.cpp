@@ -53,18 +53,6 @@ int max(int L, int R, int v = 1, int a = 0, int b = leaf_count - 1){
 	}
 }
 
-void display(int p = 1, int k = 1)
-{
-    for(int i = p; i <= k; i++)
-        std::cout << tree[i] << " ";
-    std::cout << "\n";
-    p*=2; k = k*2 + 1;
-    if(p <= leaf_count)
-        display(p, k);
-    else
-        std::cout << "\n\n";
-}
-
 int main()
 {
     std::ios_base::sync_with_stdio(0);
