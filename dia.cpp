@@ -12,7 +12,7 @@ int main(){
     while(t--){
         std::cin >> w >> h;
         int ** tab = new int*[h];
-        for(int i = 0; i < w; i++)
+        for(int i = 0; i < h; i++)
             tab[i] = new int[w];
 
         for(int i = 0; i < h; i++)
@@ -24,7 +24,7 @@ int main(){
                     );
             }
         std::cout << tab[h-1][w-1] << "\n";
-        for(int i = 0; i < w; i++)
+        for(int i = 0; i < h; i++)
             delete[] tab[i];
         delete[] tab;
     }
