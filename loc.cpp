@@ -2,8 +2,8 @@
 #include <queue>
 #include <deque>
 
-#define MAXM 500000
-#define MAXN 200000
+#define MAXM 1000
+#define MAXN 1000
 
 std::deque<int> queue;
 char plansza[MAXM][MAXN];
